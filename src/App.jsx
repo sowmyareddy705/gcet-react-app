@@ -7,7 +7,17 @@ function App() {
   
   return (
     <>
-      <h1>My shop</h1>
+      <header>
+        <h1>My shop</h1>
+        <hr/>
+      </header>
+      <main>
+<h2> product list</h2>
+      </main>
+      <footer>
+        <hr/>
+        &copy 2025.all rights Reserved.
+      </footer>
     </>
   )
 }
