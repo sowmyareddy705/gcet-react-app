@@ -43,7 +43,7 @@ export default function Login() {
 
       
       <button
-        style={{ marginTop: "12px", backgroundColor: "#191970", color: "#00356B" }}
+        style={{ marginTop: "12px", backgroundColor: "#0288d1", color: "#0288d1" }}
         onClick={handleCreateAccount}
       >
         Create Account
