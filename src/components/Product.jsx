@@ -9,7 +9,7 @@ export default function Product() {
   return (
     <div className="form-container">
       {user && <h2 className="form-title">Welcome, {user.name}!</h2>}
-      <p style={{ color: "#d86c7a" }}>Product List</p>
+      <p style={{ color: "#191970" }}>Product List</p>
     </div>
   );
 }
