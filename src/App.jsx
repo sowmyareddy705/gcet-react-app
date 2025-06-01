@@ -15,7 +15,6 @@ function App() {
           <Link to="/cart">Cart</Link>
           <hr />
         </header>
-
         <main>
           <Routes>
             <Route index element={<Product />} />
