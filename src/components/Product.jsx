@@ -1,22 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
-import axios from "axios";
+import axios from "axios"; 
+import '../App.css';
+
+
 export default function Product() {
   const { user } = useContext(AppContext);
+
   const [products, setProducts] = useState([]);
-  const fetchProducts = async () => {
-    const res = await axios.get("http://localhost:8080/products");
-    setProducts(res.data);
-  };
+   const fetchProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/products");
+        setProducts(res.data);
+      } catch (err) {
+        console.error("Error", err);
+      }
+    };
+
+
   useEffect(() => {
+   
     fetchProducts();
   }, []);
+
   return (
-    <div>
-      <h3>Welcome {user.name}! </h3>
-      Product List
-      {products && products.map((value) => <li>{value.name}</li>)}
+    <div className="form-container">
+      {user && <h2 className="form-title">Welcome, {user.name}!</h2>}
+      <p style={{ color: "#191970" }}>Product List</p><br />
+
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {products.map(product => (
+          <li key={product.id} style={{ margin: "10px 0" }}>
+            <strong>{product.name}</strong>: ${product.price}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
