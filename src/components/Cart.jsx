@@ -15,13 +15,8 @@ export default function Cart() {
     );
   };
 
-  const removeFromCart = (productId) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== productId));
-  };
-
-  const getTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  };
+  const getTotal = () =>
+    cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 
   return (
     <div className="form-container">
@@ -41,12 +36,7 @@ export default function Cart() {
                   <button onClick={() => updateQuantity(item.id, 1)}>+</button>
                 </div>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  className="remove-btn"
-                >
-                  ❌
-                </button>
+                {/* ❌ Removed delete button */}
               </li>
             ))}
           </ul>

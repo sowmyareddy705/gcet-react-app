@@ -8,16 +8,18 @@ import Logout from "./components/Logout";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
+// Global context for sharing data
 export const AppContext = createContext();
 
 function App() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]); 
 
   return (
-    <AppContext.Provider value={{ users, setUsers, user, setUser }}>
+    <AppContext.Provider value={{ users, setUsers, user, setUser, cart, setCart }}>
       <BrowserRouter>
-        <Header /> 
+        <Header />
         <main>
           <Routes>
             <Route path="/" element={<Product />} />
@@ -27,11 +29,8 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Routes>
         </main>
-
-        <Footer /> 
+        <Footer />
       </BrowserRouter>
     </AppContext.Provider>
   );
 }
-
-export default App;

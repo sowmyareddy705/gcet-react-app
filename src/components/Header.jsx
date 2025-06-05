@@ -4,14 +4,15 @@ import { AppContext } from "../App";
 import '../App.css';
 
 export default function Header() {
-  const { user } = useContext(AppContext);
+  const { user, cart } = useContext(AppContext);
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <header>
       <h1>My Online Store</h1>
       <nav>
-        <Link to="/">Home🏠︎ </Link>
-        <Link to="/cart">Cart🛒 </Link>
+        <Link to="/">Home 🏠︎</Link>
+        <Link to="/cart">Cart 🛒 ({totalItems})</Link>
         {user?.token ? (
           <Link to="/logout">Logout</Link>
         ) : (

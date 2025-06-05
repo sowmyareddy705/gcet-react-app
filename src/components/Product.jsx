@@ -10,7 +10,14 @@ export default function Product() {
   const fetchProducts = async () => {
     try {
       const res = await axios.get("http://localhost:8080/products");
-      setProducts(res.data);
+
+      // Map _id to id so cart comparison works properly
+      const mappedProducts = res.data.map(product => ({
+        ...product,
+        id: product._id
+      }));
+
+      setProducts(mappedProducts);
     } catch (err) {
       console.error("Error fetching products", err);
     }
