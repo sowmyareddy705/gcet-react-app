@@ -3,38 +3,48 @@ import { AppContext } from "../App";
 import axios from "axios"; 
 import '../App.css';
 
-
 export default function Product() {
-  const { user } = useContext(AppContext);
-
+  const { user, cart, setCart } = useContext(AppContext);
   const [products, setProducts] = useState([]);
-   const fetchProducts = async () => {
-      try {
-        const res = await axios.get("http://localhost:8080/products");
-        setProducts(res.data);
-      } catch (err) {
-        console.error("Error", err);
-      }
-    };
 
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/products");
+      setProducts(res.data);
+    } catch (err) {
+      console.error("Error fetching products", err);
+    }
+  };
 
   useEffect(() => {
-   
     fetchProducts();
   }, []);
+
+  const addToCart = (product) => {
+    const exists = cart.find(item => item.id === product.id);
+    if (exists) {
+      setCart(cart.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
 
   return (
     <div className="form-container">
       {user && <h2 className="form-title">Welcome, {user.name}!</h2>}
-      <p style={{ color: "#191970" }}>Product List</p><br />
+      <p className="section-title">Product List</p>
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <div className="product-grid center-grid">
         {products.map(product => (
-          <li key={product.id} style={{ margin: "10px 0" }}>
-            <strong>{product.name}</strong>: ${product.price}
-          </li>
+          <div key={product.id} className="product-card">
+            <h3>{product.name}</h3>
+            <p>${product.price.toFixed(2)}</p>
+            <button onClick={() => addToCart(product)}>Add to Cart</button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
