@@ -34,3 +34,4 @@ function App() {
     </AppContext.Provider>
   );
 }
+export default App;
