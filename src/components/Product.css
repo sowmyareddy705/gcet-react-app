@@ -6,7 +6,7 @@
 /* Welcome Section */
 .welcome-box {
   margin: 30px auto;
-  background-color: #646a6e;
+  background-color: #b7bcc0;
   padding: 25px;
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -41,7 +41,7 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
   padding: 30px;
-  background: #f4f6f8;
+  background: #363d3f;
 }
 
 /* Product Card */
