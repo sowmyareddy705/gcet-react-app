@@ -1,4 +1,41 @@
-/* Container */
+/* Product Page Container */
+.product-page {
+  padding: 20px;
+}
+
+/* Welcome Section */
+.welcome-box {
+  margin: 30px auto;
+  background-color: #646a6e;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  max-width: 600px;
+}
+
+.welcome-box h3 {
+  font-size: 26px;
+  color: #0a2642;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.welcome-icon {
+  color: #e0dd0e;
+  font-size: 24px;
+}
+
+.welcome-desc {
+  font-size: 15px;
+  color: #3d4249;
+  margin-top: 0;
+}
+
+/* Product Grid */
 .App-Product-Row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -34,7 +71,7 @@
   margin-bottom: 15px;
 }
 
-/* Text Styling */
+/* Product Text */
 .product-card h3 {
   font-size: 20px;
   color: #333;
@@ -84,13 +121,4 @@ button:hover {
 .btn:hover {
   background-color: #218838;
   transform: translateY(-2px);
-}
-
-/* Welcome Heading */
-h3 {
-  text-align: center;
-  font-size: 24px;
-  margin-top: 30px;
-  color: #222;
-  font-weight: 700;
 }

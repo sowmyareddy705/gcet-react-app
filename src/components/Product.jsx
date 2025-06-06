@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { FaSmile } from "react-icons/fa"; // Icon for welcome
 import "./Product.css";
 
 export default function Product() {
@@ -19,8 +20,17 @@ export default function Product() {
   }, []);
 
   return (
-    <div>
-      <h3>Welcome {user.name}!</h3>
+    <div className="product-page">
+      <div className="welcome-box">
+        <h3>
+          <FaSmile className="welcome-icon" />
+          Welcome {user.name}!
+        </h3>
+        <p className="welcome-desc">
+          Explore our latest collection and enjoy your shopping experience!
+        </p>
+      </div>
+
       <div className="App-Product-Row">
         {products.map((value) => (
           <div className="product-card" key={value._id}>
@@ -35,6 +45,7 @@ export default function Product() {
           </div>
         ))}
       </div>
+
       <br />
       <button onClick={() => navigate("/cart")} className="btn">
         🛒 Go to Cart

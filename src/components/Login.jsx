@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Login.css"; // <-- import here
 
 export default function Login() {
   const { user, setUser } = useContext(AppContext);
@@ -39,27 +40,23 @@ export default function Login() {
   };
 
   return (
-    <div style={{ margin: "30px" }}>
-      <h3>Login</h3>
-      <p style={{ color: "red" }}>{msg}</p>
-      <p>
+    <div className="login-container">
+      <div className="login-box">
+        <h3>LOGIN</h3>
+        <p>{msg}</p>
         <input
           type="text"
           placeholder="Email address"
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
-      </p>
-      <p>
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setUser({ ...user, pass: e.target.value })}
         />
-      </p>
-      <button onClick={handleSubmit}>Submit</button>
-      <p>
+        <button onClick={handleSubmit}>Submit</button>
         <button onClick={goToRegister}>Create Account</button>
-      </p>
+      </div>
     </div>
   );
 }

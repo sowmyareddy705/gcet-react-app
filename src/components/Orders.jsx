@@ -13,7 +13,7 @@ export default function Orders() {
       if (user?.email) {
         try {
           const res = await axios.get(
-            `/orders/all?email=${user.email}`
+            `https://gcet-node-app-pi.vercel.app/orders/all?email=${user.email}`
           );
           setOrders(res.data);
         } catch (error) {
