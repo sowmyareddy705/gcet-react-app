@@ -1,51 +1,65 @@
-import React, { useContext, useState } from "react";
-import { AppContext } from "../App"; 
+import React, { useState, useContext } from "react";
+import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import '../App.css';
+import axios from "axios";
 
 export default function Login() {
-  const { users, setUser } = useContext(AppContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(AppContext);
+  const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
-     setUser({ ...user, token: "abc123" }); 
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post("https://gcet-node-app-pi.vercel.app/users/login", {
+        email: user.email,
+        pass: user.pass,
+      });
 
-      navigate("/");
-    } else {
-      alert("Invalid credentials");
+      const found = res.data;
+
+      if (found && found.name) {
+        setMsg("Welcome " + found.name);
+        setUser({ ...user, name: found.name, token: "123" });
+        navigate("/");
+      } else {
+        setMsg("Invalid email or password");
+      }
+    } catch (err) {
+      console.error("Login failed:", err);
+      if (err.response?.status === 401) {
+        setMsg("Invalid email or password");
+      } else {
+        setMsg("Something went wrong during login");
+      }
     }
   };
 
-  const handleCreateAccount = () => {
+  const goToRegister = () => {
     navigate("/register");
   };
 
   return (
-    <div className="form-container">
-      <h3 className="form-title">Login</h3>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Submit</button>
-
-      
-      <button
-        style={{ marginTop: "12px", backgroundColor: "#0288d1", color: "#fff" }}
-        onClick={handleCreateAccount}
-      > Create Account </button>
+    <div style={{ margin: "30px" }}>
+      <h3>Login</h3>
+      <p style={{ color: "red" }}>{msg}</p>
+      <p>
+        <input
+          type="text"
+          placeholder="Email address"
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        />
+      </p>
+      <p>
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setUser({ ...user, pass: e.target.value })}
+        />
+      </p>
+      <button onClick={handleSubmit}>Submit</button>
+      <p>
+        <button onClick={goToRegister}>Create Account</button>
+      </p>
     </div>
   );
 }

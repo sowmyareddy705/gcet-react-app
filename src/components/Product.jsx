@@ -1,57 +1,44 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import { AppContext } from "../App";
-import axios from "axios"; 
-import '../App.css';
+import { useNavigate } from "react-router-dom";
+import "./Product.css";
 
 export default function Product() {
-  const { user, cart, setCart } = useContext(AppContext);
+  const { user, addToCart } = useContext(AppContext);
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/products");
-
-      // Map _id to id so cart comparison works properly
-      const mappedProducts = res.data.map(product => ({
-        ...product,
-        id: product._id
-      }));
-
-      setProducts(mappedProducts);
-    } catch (err) {
-      console.error("Error fetching products", err);
-    }
+    const res = await axios.get(`https://gcet-node-app-pi.vercel.app/produts/`);
+    setProducts(res.data);
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const addToCart = (product) => {
-    const exists = cart.find(item => item.id === product.id);
-    if (exists) {
-      setCart(cart.map(item =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      ));
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-  };
-
   return (
-    <div className="form-container">
-      {user && <h2 className="form-title">Welcome, {user.name}!</h2>}
-      <p className="section-title">Product List</p>
-
-      <div className="product-grid center-grid">
-        {products.map(product => (
-          <div key={product.id} className="product-card">
-            <h3>{product.name}</h3>
-            <p>${product.price.toFixed(2)}</p>
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
+    <div>
+      <h3>Welcome {user.name}!</h3>
+      <div className="App-Product-Row">
+        {products.map((value) => (
+          <div className="product-card" key={value._id}>
+            <img
+              src={value.imgUrl}
+              alt={value.name}
+              className="product-image"
+            />
+            <h3>{value.name}</h3>
+            <h4>₹{value.price}</h4>
+            <button onClick={() => addToCart(value)}>Add to Cart</button>
           </div>
         ))}
       </div>
+      <br />
+      <button onClick={() => navigate("/cart")} className="btn">
+        🛒 Go to Cart
+      </button>
     </div>
   );
 }
