@@ -19,17 +19,14 @@ export default function Cart() {
     setCart(updatedCart);
   };
 
-const decrementQty = (index) => {
-  const updatedCart = [...cart];
-  updatedCart[index].quantity -= 1;
-
-  if (updatedCart[index].quantity <= 0) {
-    updatedCart.splice(index, 1); // Remove the item completely
-  }
-
-  setCart(updatedCart);
-};
-
+  const decrementQty = (index) => {
+    const updatedCart = [...cart];
+    updatedCart[index].quantity -= 1;
+    if (updatedCart[index].quantity <= 0) {
+      updatedCart.splice(index, 1); // Remove the item completely
+    }
+    setCart(updatedCart);
+  };
 
   const placeOrder = async () => {
     if (!user || !user.email) {

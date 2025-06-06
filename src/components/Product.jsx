@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { FaSmile } from "react-icons/fa"; // Icon for welcome
+import { FaSmile } from "react-icons/fa";
 import "./Product.css";
 
 export default function Product() {
@@ -32,16 +32,12 @@ export default function Product() {
       </div>
 
       <div className="App-Product-Row">
-        {products.map((value) => (
-          <div className="product-card" key={value._id}>
-            <img
-              src={value.imgUrl}
-              alt={value.name}
-              className="product-image"
-            />
-            <h3>{value.name}</h3>
-            <h4>₹{value.price}</h4>
-            <button onClick={() => addToCart(value)}>Add to Cart</button>
+        {products.map((product) => (
+          <div className="product-card" key={product._id}>
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <h4>₹{product.price}</h4>
+            <button onClick={() => addToCart(product)}>Add to Cart</button>
           </div>
         ))}
       </div>
