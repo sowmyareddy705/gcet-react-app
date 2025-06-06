@@ -10,7 +10,7 @@ export default function Product() {
   const navigate = useNavigate();
 
   const fetchProducts = async () => {
-    const res = await axios.get(`https://gcet-node-app-pi.vercel.app/produts/`);
+    const res = await axios.get(`https://gcet-node-app-pi.vercel.app/products/`);
     setProducts(res.data);
   };
 
