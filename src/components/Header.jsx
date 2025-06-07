@@ -12,7 +12,7 @@ export default function Header() {
     <header className="header">
       <div className="logo">
         <FaStore style={{ marginRight: "8px" }} />
-        My Online Shop
+        SKINCARE-STORE
       </div>
       <nav className="nav">
         <Link to="/">
