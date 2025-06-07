@@ -25,7 +25,7 @@
 }
 
 .welcome-icon {
-  color: #e0dd0e;
+  color: #070706;
   font-size: 24px;
 }
 
@@ -35,13 +35,22 @@
   margin-top: 0;
 }
 
+.welcome-box {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHeuLkMeSVWRprjXTeZwWiSnOLiMXn2aQVsg&s'); /* update with your image path */
+  background-position:left;
+  border-radius: 12px;
+  padding: 2rem;
+  color: white; /* ensures text is visible */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 /* Product Grid */
 .App-Product-Row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
   padding: 30px;
-  background: #363d3f;
+  background: #696666;
 }
 
 /* Product Card */
@@ -99,7 +108,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #12be2f;
   transform: scale(1.05);
 }
 

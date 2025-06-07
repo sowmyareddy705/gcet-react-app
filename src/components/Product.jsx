@@ -20,16 +20,18 @@ export default function Product() {
   }, []);
 
   return (
-    <div className="product-page">
+    
+     <div className="product-page">
       <div className="welcome-box">
-        <h3>
-          <FaHeart className="welcome-icon" />
-          Welcome {user.name}!
-        </h3>
-        <p className="welcome-desc">
-          Explore our latest collection and enjoy your shopping experience!
-        </p>
-      </div>
+  <h3>
+    <FaHeart className="welcome-icon" />
+    Welcome {user.name}!
+  </h3>
+  <p className="welcome-desc">
+    Explore our latest collection and enjoy your shopping experience!
+  </p>
+</div>
+
 
       <div className="App-Product-Row">
         {products.map((product) => (
